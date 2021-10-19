@@ -4,6 +4,7 @@
 #include "products.h"
 
 void print_product(struct product *p) {
+  if (p == NULL) return;
   printf("%d %s in stock\n", p -> quantity, p -> name);
 }
 
@@ -22,13 +23,14 @@ void print_list(struct product *p) {
     printf("empty list\n");
     return;
   }
-  
+
   print_product(p);
 
   if (p -> next != NULL) print_list(p -> next);
 }
 
 struct product * insert_front(struct product *p, char *n, int q) {
+  if (p == NULL) return;
   struct product *new_product = make_product(n, q);
   new_product -> next = p;
 
@@ -36,6 +38,7 @@ struct product * insert_front(struct product *p, char *n, int q) {
 }
 
 struct product * free_list(struct product *p) {
+  if (p == NULL) return;
   if (p -> next != NULL) free_list(p -> next);
 
   printf("freeing %s\n", p -> name);
